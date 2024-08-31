@@ -59,7 +59,7 @@
             </ul>
 
             <a href="{{ url('/') }}" class="brand-link bg-info mx-auto py-0 d-inline-block d-sm-none">
-                <img src="{{ asset('images/home.png') }}" alt="APP Logo" class="brand-image p-1 mt-0 ml-0 bg-white img-circle" style="opacity: .8">
+                <img src="{{ asset('svg/preg.svg') }}" alt="APP Logo" class="brand-image p-1 mt-0 ml-0 bg-white img-circle" style="opacity: .8">
                 <span class="brand-text font-weight-bold h3">{{ config('app.name', 'Laravel') }}</span>
             </a>
 
@@ -75,7 +75,7 @@
 
         <aside class="main-sidebar sidebar-light-info elevation-4" style="overflow-x: hidden;">
             <a href="{{ url('/') }}" class="brand-link bg-info">
-                <img src="{{ asset('images/home.png') }}" alt="APP Logo" class="brand-image p-1 bg-white img-circle" style="opacity: .8">
+                <img src="{{ asset('svg/preg.svg') }}" alt="APP Logo" class="brand-image p-1 bg-white img-circle" style="opacity: .8">
                 <span class="brand-text font-weight-bold">{{ config('app.name', 'Laravel') }}</span>
             </a>
 

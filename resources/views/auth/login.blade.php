@@ -3,7 +3,7 @@
 @section('content')
 <div class="login-box">
     <div class="login-logo mb-3">
-        <img src="{{ asset('images/home.png') }}" alt="Logo" class="img-fluid mx-auto d-block" style="width: 75px">
+        <img src="{{ asset('svg/preg.svg') }}" alt="Logo" class="img-fluid mx-auto d-block" style="width: 75px">
     </div>
     <div class="card">
         <div class="card-body login-card-body">
@@ -43,7 +43,7 @@
                     </button>
                 </div>
             </form>
-            <br><center><p>Repost by <a href='https://www.youtube.com/@kaseps8304/videos' title='kasep_code' target='_blank'>Kasep_Code</a></p></center>
+            <!-- <br><center><p>Repost by <a href='https://www.youtube.com/@kaseps8304/videos' title='kasep_code' target='_blank'>Kasep_Code</a></p></center> -->
             
         </div>
     </div>
