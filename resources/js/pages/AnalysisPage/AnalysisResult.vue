@@ -17,6 +17,27 @@
                                 <th nowrap class="text-center table-secondary">Bobot</th>
                             </tr>
                         </thead>
+                        <!-- <tbody>
+                            <tr v-for="alternative in alternatives" :key="alternative.id">
+                                <td></td>
+                            </tr>
+                        </tbody> -->
+                        <tbody>
+                            <tr v-for="item in alternatives" :key="item.id" :class="{ 'table-info': item.total == topPoint }">
+                                <td nowrap><b>{{ item.code + ' : ' +item.name }}</b></td>
+                                <td class="text-center" v-for="detail in item.details" :key="detail.id">{{ detail.value }}</td>
+                                <td class="text-center table-secondary" :class="{ 'font-weight-bold table-info': item.total == topPoint }">{{ item.total }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th nowrap class="text-center" v-for="item in criterias" :key="item.id">{{ item.name }}</th>
+                                <th nowrap class="text-center table-secondary">Bobot</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr v-for="item in alternatives" :key="item.id" :class="{ 'table-info': item.total == topPoint }">
                                 <td nowrap><b>{{ item.code + ' : ' +item.name }}</b></td>
@@ -24,13 +45,14 @@
                                 <td class="text-center table-secondary" :class="{ 'font-weight-bold table-info': item.total == topPoint }">{{ item.total }}</td>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
                 <div class="card-body" v-show="view == 'chart'">
                     <canvas ref="myChart" style="min-height: 400px"></canvas>
                 </div>
                 <div class="card-footer text-center py-4">
-                    <b>Kesimpulan</b> : Jadi, yang disarankan oleh system adalah <b v-for="item in result" :key="item.id"><u>"{{ item.name }}"</u></b>
+                    <b>Kesimpulan</b> : Jadi, <b v-for="item in result" :key="item.id"><u>"{{ item.name }}"</u></b> memiliki bobot tertinggi dalam hasil akhir penentuan gizi ibu hamil dengan
+                    metode AHP 
                 </div>
             </div>
         </div>

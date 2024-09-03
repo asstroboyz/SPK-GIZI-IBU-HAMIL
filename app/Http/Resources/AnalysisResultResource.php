@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Alternative\AlternativeDetail;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\Result\CriteriaPriorityResource;
 
@@ -20,6 +21,7 @@ class AnalysisResultResource extends JsonResource
             'code' => $this->code,
             'name' => $this->name,
             'priorities' => CriteriaPriorityResource::collection($this->priority->sortBy('criteria.code')),
+            'details' => AlternativeDetail::collection($this->details),
             'total' => $this->priority->sum('value'),
         ];
     }
