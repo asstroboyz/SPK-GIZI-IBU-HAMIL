@@ -19,7 +19,7 @@ class AlternativeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'required|string|max:4|unique:alternatives',
+            'code' => 'required|string|max:255|unique:alternatives',
             'name' => 'required|string|max:255'
         ]);
 
@@ -31,7 +31,7 @@ class AlternativeController extends Controller
     public function update(Request $request, Alternative $alternative)
     {
         $request->validate([
-            'code' => 'required|string|max:4|unique:alternatives,code,'.$alternative->id,
+            'code' => 'required|string|max:255|unique:alternatives,code,'.$alternative->id,
             'name' => 'required|string|max:255'
         ]);
 

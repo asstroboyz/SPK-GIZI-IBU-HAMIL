@@ -30,7 +30,7 @@
                     <canvas ref="myChart" style="min-height: 400px"></canvas>
                 </div>
                 <div class="card-footer text-center py-4">
-                    <b>Kesimpulan</b> : Jadi, wisma yang disarankan oleh system adalah <b v-for="item in result" :key="item.id"><u>"{{ item.name }}"</u></b>
+                    <b>Kesimpulan</b> : Jadi, yang disarankan oleh system adalah <b v-for="item in result" :key="item.id"><u>"{{ item.name }}"</u></b>
                 </div>
             </div>
         </div>

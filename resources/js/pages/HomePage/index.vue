@@ -9,7 +9,7 @@
                     <canvas nowrap ref="myChart" style="min-height: 300px"></canvas>
                 </div>
             </div>
-            <div class="card-group">
+            <!-- <div class="card-group">
                 <div class="card card-info d-none d-sm-flex">
                     <div class="card-header text-center">
                         <b>Detail</b>
@@ -34,12 +34,43 @@
                         </tbody>
                     </table>
                 </div>
+            </div> -->
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td class="rounded rounded-top rounded-left text-bold bg-info text-white text-center">Alternatif</td>
+      <td
+        v-for="(item, index) in criterias"
+        :key="item.id"
+        :class="{               
+          'rounded rounded-top rounded-right': index === criterias.length - 1 // Elemen terakhir
+        }"
+        align="center"
+        class="text-bold bg-info text-white"
+      >
+        {{ item.name }}
+      </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in result" :key="item.id" class="bg-white">
+                            <td>{{ item.name }}</td>
+                            <td v-for="angka in item.criteria_priorities" :key="angka.id">
+                                {{ angka.value }}
+                            </td>
+                            <!-- <td v-for="item in data" :key="item.id">{{ item.name }}</td> -->
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 </template>
 
 <script>
+import { result } from 'lodash';
+
 export default {
     data() {
         return {

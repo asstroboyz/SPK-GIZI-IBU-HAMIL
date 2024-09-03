@@ -20,7 +20,7 @@ class CriteriaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'required|string|max:4|unique:criterias',
+            'code' => 'required|string|max:255|unique:criterias',
             'name' => 'required|string|max:255'
         ]);
 
@@ -36,7 +36,7 @@ class CriteriaController extends Controller
     public function update(Request $request, Criteria $criteria)
     {
         $request->validate([
-            'code' => 'required|string|max:4|unique:criterias,code,'.$criteria->id,
+            'code' => 'required|string|max:255|unique:criterias,code,'.$criteria->id,
             'name' => 'required|string|max:255'
         ]);
 
