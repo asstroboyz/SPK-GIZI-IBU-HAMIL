@@ -1,163 +1,73 @@
 <template>
-    <section class="content mt-3">
-        <div class="container">
-            <div class="card card-info">
-                <div class="card-header text-center text-sm-left">
-                    <b><u>Hasil Analisa Terakhir</u></b> <span class="ml-1 d-none d-sm-inline">Berdasarkan dari kriteria masing-masing Alternatif</span>
-                </div>
-                <div class="card-body">
-                    <canvas nowrap ref="myChart" style="min-height: 300px"></canvas>
-                </div>
-            </div>
-            <!-- <div class="card-group">
-                <div class="card card-info d-none d-sm-flex">
-                    <div class="card-header text-center">
-                        <b>Detail</b>
-                    </div>
-                    <table class="table">
-                        <tbody>
-                            <tr v-for="item in criterias" :key="item.id">
-                                <td>{{ item.name }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card card-info" v-for="item in alternatives" :key="item.id">
-                    <div class="card-header text-center">
-                        <b style="white-space: nowrap">{{ item.name }}</b>
-                    </div>
-                    <table class="table">
-                        <tbody>
-                            <tr v-for="detail in item.detail" :key="detail.criteria_id">
-                                <td class="text-center">{{ detail.value }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div> -->
-            <div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <td class="rounded rounded-top rounded-left text-bold bg-info text-white text-center">Alternatif</td>
-      <td
-        v-for="(item, index) in criterias"
-        :key="item.id"
-        :class="{               
-          'rounded rounded-top rounded-right': index === criterias.length - 1 // Elemen terakhir
-        }"
-        align="center"
-        class="text-bold bg-info text-white"
-      >
-        {{ item.name }}
-      </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="item in result" :key="item.id" class="bg-white">
-                            <td>{{ item.name }}</td>
-                            <td v-for="angka in item.criteria_priorities" :key="angka.id">
-                                {{ angka.value }}
-                            </td>
-                            <!-- <td v-for="item in data" :key="item.id">{{ item.name }}</td> -->
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+  <section class="content mt-3">
+    <div class="container mx-auto">
+      <div class="card card-info p-4">
+        <h2 class="text-2xl font-bold mb-4">Analytical Hierarchy Process (AHP)</h2>
+        <p class="mb-4">
+          Analytic Hierarchy Process (AHP) merupakan suatu model pendukung keputusan yang dikembangkan oleh Thomas L. Saaty. Model ini menguraikan masalah multi faktor atau multi kriteria yang kompleks menjadi suatu hirarki. Hirarki didefinisikan sebagai representasi dari sebuah permasalahan kompleks dalam struktur multi-level, di mana level pertama adalah tujuan, diikuti oleh level faktor, kriteria, sub-kriteria, dan seterusnya hingga level terakhir dari alternatif.
+        </p>
+        <p class="mb-4">
+          AHP membantu pengambil keputusan untuk memperoleh solusi terbaik dengan mendekomposisi permasalahan kompleks ke dalam bentuk yang lebih sederhana, kemudian melakukan sintesis terhadap berbagai faktor yang terlibat. AHP mempertimbangkan aspek kualitatif dan kuantitatif dari suatu keputusan dan mengurangi kompleksitasnya dengan membandingkan berbagai kriteria yang dipilih untuk mendapatkan hasil.
+        </p>
+        <p class="mb-4">
+          AHP sering digunakan sebagai metode pemecahan masalah dibanding metode lain karena beberapa alasan berikut:
+        </p>
+        <ol class="list-decimal list-inside mb-4">
+          <li>Struktur yang berhirarki, sebagai konsekuensi dari kriteria yang dipilih hingga subkriteria yang paling dalam.</li>
+          <li>Memperhitungkan validitas sampai batas toleransi inkonsistensi berbagai kriteria dan alternatif yang dipilih oleh pengambil keputusan.</li>
+          <li>Memperhitungkan daya tahan output analisis sensitivitas pengambilan keputusan.</li>
+        </ol>
+        <p class="mb-4">
+          Penggunaan AHP bukan hanya untuk institusi pemerintahan atau swasta, namun juga dapat diaplikasikan untuk keperluan individu, terutama dalam penelitian yang berkaitan dengan kebijakan atau perumusan strategi prioritas. AHP dapat diandalkan karena prioritas disusun dari berbagai pilihan kriteria yang didekomposisi terlebih dahulu, sehingga penetapan prioritas didasarkan pada proses yang terstruktur dan masuk akal.
+        </p>
+        <h3 class="text-xl font-semibold mt-6 mb-2">Tabel Tingkat Kepentingan Menurut Saaty (1980)</h3>
+        <table class="w-full border-collapse border border-blue-500 mb-4">
+          <thead>
+            <tr>
+              <th class="border border-blue-500 p-2">Nilai Numerik</th>
+              <th class="border border-blue-500 p-2">Tingkat Kepentingan <em>(Preference)</em></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-blue-500 text-center p-2">1</td>
+              <td class="border border-blue-500 p-2">Sama pentingnya <em>(Equal Importance)</em></td>
+            </tr>
+            <tr>
+              <td class="border border-blue-500 text-center p-2">2</td>
+              <td class="border border-blue-500 p-2">Sama hingga sedikit lebih penting</td>
+            </tr>
+            <tr>
+              <td class="border border-blue-500 text-center p-2">3</td>
+              <td class="border border-blue-500 p-2">Sedikit lebih penting <em>(Slightly more importance)</em></td>
+            </tr>
+            <tr>
+              <td class="border border-blue-500 text-center p-2">4</td>
+              <td class="border border-blue-500 p-2">Sedikit lebih hingga jelas lebih penting</td>
+            </tr>
+            <tr>
+              <td class="border border-blue-500 text-center p-2">5</td>
+              <td class="border border-blue-500 p-2">Jelas lebih penting <em>(Materially more importance)</em></td>
+            </tr>
+            <tr>
+              <td class="border border-blue-500 text-center p-2">6</td>
+              <td class="border border-blue-500 p-2">Jelas hingga sangat jelas lebih penting</td>
+            </tr>
+            <tr>
+              <td class="border border-blue-500 text-center p-2">7</td>
+              <td class="border border-blue-500 p-2">Sangat jelas lebih penting <em>(Significantly more importance)</em></td>
+            </tr>
+            <tr>
+              <td class="border border-blue-500 text-center p-2">8</td>
+              <td class="border border-blue-500 p-2">Sangat jelas hingga mutlak lebih penting</td>
+            </tr>
+            <tr>
+              <td class="border border-blue-500 text-center p-2">9</td>
+              <td class="border border-blue-500 p-2">Mutlak lebih penting <em>(Absolutely more importance)</em></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 </template>
-
-<script>
-import { result } from 'lodash';
-
-export default {
-    data() {
-        return {
-            result: [],
-            criterias: [],
-            alternatives: [],
-            colors: ['rgba(190, 229, 235, 0.7)', 'rgba(176, 221, 153, 0.7)', 'rgba(226, 193, 192, 0.7)']
-        }
-    },
-    watch: {
-        'result': function() {
-            this.chart()
-        }
-    },
-    computed: {
-        chartLabels() {
-            return this.criterias.map(item => {
-                return item.code + ' - ' + item.name
-            })
-        },
-        charDatasets() {
-            return this.result.map((item, index) => {
-                return {
-                    label : item.name,
-                    borderColor : this.colors[index],
-                    backgroundColor : this.colors[index],
-                    data : item.criteria_priorities.map(pv => {
-                        return pv.value
-                    })
-                }
-            })
-        }
-    },
-    methods: {
-        init() {
-            axios.get('/analysis/result/by-alternative')
-            .then(({ data }) => {
-                this.result = data.data
-                this.criterias = data.criterias
-                this.alternatives = data.alternatives
-            })
-        },
-        chart() {
-            let labels = this.chartLabels;
-            let value = this.chartValue;
-            let datasets = this.charDatasets;
-            let chartData = {
-                labels  : labels,
-                datasets: datasets
-            }
-            let chartOptions = {
-                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-                scaleBeginAtZero        : true,
-                //Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines      : true,
-                //String - Colour of the grid lines
-                scaleGridLineColor      : 'rgba(0,0,0,.05)',
-                //Number - Width of the grid lines
-                scaleGridLineWidth      : 1,
-                //Boolean - Whether to show horizontal lines (except X axis)
-                scaleShowHorizontalLines: true,
-                //Boolean - Whether to show vertical lines (except Y axis)
-                scaleShowVerticalLines  : true,
-                //Boolean - If there is a stroke on each bar
-                barShowStroke           : true,
-                //Number - Pixel width of the bar stroke
-                barStrokeWidth          : 2,
-                //Number - Spacing between each of the X value sets
-                barValueSpacing         : 5,
-                //Number - Spacing between data sets within X values
-                barDatasetSpacing       : 1,
-                //String - A legend template
-                legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-                //Boolean - whether to make the chart responsive
-                responsive              : true,
-                maintainAspectRatio     : false
-            }
-
-            new Chart(this.$refs.myChart, {
-                type: 'bar',
-                data: chartData,
-                options: chartOptions
-            });
-        }
-    },
-    created() {
-        this.init()
-    }
-}
-</script>

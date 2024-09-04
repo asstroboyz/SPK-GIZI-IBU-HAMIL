@@ -75149,7 +75149,7 @@ if (inBrowser && window.Vue) {
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(191)
+var __vue_script__ = null
 /* template */
 var __vue_template__ = __webpack_require__(192)
 /* template functional */
@@ -75190,183 +75190,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 191 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            result: [],
-            criterias: [],
-            alternatives: [],
-            colors: ['rgba(190, 229, 235, 0.7)', 'rgba(176, 221, 153, 0.7)', 'rgba(226, 193, 192, 0.7)']
-        };
-    },
-
-    watch: {
-        'result': function result() {
-            this.chart();
-        }
-    },
-    computed: {
-        chartLabels: function chartLabels() {
-            return this.criterias.map(function (item) {
-                return item.code + ' - ' + item.name;
-            });
-        },
-        charDatasets: function charDatasets() {
-            var _this = this;
-
-            return this.result.map(function (item, index) {
-                return {
-                    label: item.name,
-                    borderColor: _this.colors[index],
-                    backgroundColor: _this.colors[index],
-                    data: item.criteria_priorities.map(function (pv) {
-                        return pv.value;
-                    })
-                };
-            });
-        }
-    },
-    methods: {
-        init: function init() {
-            var _this2 = this;
-
-            axios.get('/analysis/result/by-alternative').then(function (_ref) {
-                var data = _ref.data;
-
-                _this2.result = data.data;
-                _this2.criterias = data.criterias;
-                _this2.alternatives = data.alternatives;
-            });
-        },
-        chart: function chart() {
-            var labels = this.chartLabels;
-            var value = this.chartValue;
-            var datasets = this.charDatasets;
-            var chartData = {
-                labels: labels,
-                datasets: datasets
-            };
-            var chartOptions = {
-                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-                scaleBeginAtZero: true,
-                //Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines: true,
-                //String - Colour of the grid lines
-                scaleGridLineColor: 'rgba(0,0,0,.05)',
-                //Number - Width of the grid lines
-                scaleGridLineWidth: 1,
-                //Boolean - Whether to show horizontal lines (except X axis)
-                scaleShowHorizontalLines: true,
-                //Boolean - Whether to show vertical lines (except Y axis)
-                scaleShowVerticalLines: true,
-                //Boolean - If there is a stroke on each bar
-                barShowStroke: true,
-                //Number - Pixel width of the bar stroke
-                barStrokeWidth: 2,
-                //Number - Spacing between each of the X value sets
-                barValueSpacing: 5,
-                //Number - Spacing between data sets within X values
-                barDatasetSpacing: 1,
-                //String - A legend template
-                legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-                //Boolean - whether to make the chart responsive
-                responsive: true,
-                maintainAspectRatio: false
-            };
-
-            new Chart(this.$refs.myChart, {
-                type: 'bar',
-                data: chartData,
-                options: chartOptions
-            });
-        }
-    },
-    created: function created() {
-        this.init();
-    }
-});
-
-/***/ }),
+/* 191 */,
 /* 192 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -75374,93 +75198,204 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", { staticClass: "content mt-3" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "card card-info" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("canvas", {
-            ref: "myChart",
-            staticStyle: { "min-height": "300px" },
-            attrs: { nowrap: "" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", [
-        _c("table", { staticClass: "table table-bordered" }, [
-          _c("thead", [
-            _c(
-              "tr",
-              [
-                _c(
-                  "td",
-                  {
-                    staticClass:
-                      "rounded rounded-top rounded-left text-bold bg-info text-white text-center"
-                  },
-                  [_vm._v("Alternatif")]
-                ),
-                _vm._v(" "),
-                _vm._l(_vm.criterias, function(item, index) {
-                  return _c(
-                    "td",
-                    {
-                      key: item.id,
-                      staticClass: "text-bold bg-info text-white",
-                      class: {
-                        "rounded rounded-top rounded-right":
-                          index === _vm.criterias.length - 1 // Elemen terakhir
-                      },
-                      attrs: { align: "center" }
-                    },
-                    [_vm._v("\n    " + _vm._s(item.name) + "\n  ")]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.result, function(item) {
-              return _c(
-                "tr",
-                { key: item.id, staticClass: "bg-white" },
-                [
-                  _c("td", [_vm._v(_vm._s(item.name))]),
-                  _vm._v(" "),
-                  _vm._l(item.criteria_priorities, function(angka) {
-                    return _c("td", { key: angka.id }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(angka.value) +
-                          "\n                        "
-                      )
-                    ])
-                  })
-                ],
-                2
-              )
-            })
-          )
-        ])
-      ])
-    ])
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header text-center text-sm-left" }, [
-      _c("b", [_c("u", [_vm._v("Hasil Analisa Terakhir")])]),
-      _vm._v(" "),
-      _c("span", { staticClass: "ml-1 d-none d-sm-inline" }, [
-        _vm._v("Berdasarkan dari kriteria masing-masing Alternatif")
+    return _c("section", { staticClass: "content mt-3" }, [
+      _c("div", { staticClass: "container mx-auto" }, [
+        _c("div", { staticClass: "card card-info p-4" }, [
+          _c("h2", { staticClass: "text-2xl font-bold mb-4" }, [
+            _vm._v("Analytical Hierarchy Process (AHP)")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "mb-4" }, [
+            _vm._v(
+              "\n        Analytic Hierarchy Process (AHP) merupakan suatu model pendukung keputusan yang dikembangkan oleh Thomas L. Saaty. Model ini menguraikan masalah multi faktor atau multi kriteria yang kompleks menjadi suatu hirarki. Hirarki didefinisikan sebagai representasi dari sebuah permasalahan kompleks dalam struktur multi-level, di mana level pertama adalah tujuan, diikuti oleh level faktor, kriteria, sub-kriteria, dan seterusnya hingga level terakhir dari alternatif.\n      "
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "mb-4" }, [
+            _vm._v(
+              "\n        AHP membantu pengambil keputusan untuk memperoleh solusi terbaik dengan mendekomposisi permasalahan kompleks ke dalam bentuk yang lebih sederhana, kemudian melakukan sintesis terhadap berbagai faktor yang terlibat. AHP mempertimbangkan aspek kualitatif dan kuantitatif dari suatu keputusan dan mengurangi kompleksitasnya dengan membandingkan berbagai kriteria yang dipilih untuk mendapatkan hasil.\n      "
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "mb-4" }, [
+            _vm._v(
+              "\n        AHP sering digunakan sebagai metode pemecahan masalah dibanding metode lain karena beberapa alasan berikut:\n      "
+            )
+          ]),
+          _vm._v(" "),
+          _c("ol", { staticClass: "list-decimal list-inside mb-4" }, [
+            _c("li", [
+              _vm._v(
+                "Struktur yang berhirarki, sebagai konsekuensi dari kriteria yang dipilih hingga subkriteria yang paling dalam."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v(
+                "Memperhitungkan validitas sampai batas toleransi inkonsistensi berbagai kriteria dan alternatif yang dipilih oleh pengambil keputusan."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v(
+                "Memperhitungkan daya tahan output analisis sensitivitas pengambilan keputusan."
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "mb-4" }, [
+            _vm._v(
+              "\n        Penggunaan AHP bukan hanya untuk institusi pemerintahan atau swasta, namun juga dapat diaplikasikan untuk keperluan individu, terutama dalam penelitian yang berkaitan dengan kebijakan atau perumusan strategi prioritas. AHP dapat diandalkan karena prioritas disusun dari berbagai pilihan kriteria yang didekomposisi terlebih dahulu, sehingga penetapan prioritas didasarkan pada proses yang terstruktur dan masuk akal.\n      "
+            )
+          ]),
+          _vm._v(" "),
+          _c("h3", { staticClass: "text-xl font-semibold mt-6 mb-2" }, [
+            _vm._v("Tabel Tingkat Kepentingan Menurut Saaty (1980)")
+          ]),
+          _vm._v(" "),
+          _c(
+            "table",
+            {
+              staticClass: "w-full border-collapse border border-blue-500 mb-4"
+            },
+            [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Nilai Numerik")
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Tingkat Kepentingan "),
+                    _c("em", [_vm._v("(Preference)")])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("tbody", [
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "border border-blue-500 text-center p-2" },
+                    [_vm._v("1")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Sama pentingnya "),
+                    _c("em", [_vm._v("(Equal Importance)")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "border border-blue-500 text-center p-2" },
+                    [_vm._v("2")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Sama hingga sedikit lebih penting")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "border border-blue-500 text-center p-2" },
+                    [_vm._v("3")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Sedikit lebih penting "),
+                    _c("em", [_vm._v("(Slightly more importance)")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "border border-blue-500 text-center p-2" },
+                    [_vm._v("4")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Sedikit lebih hingga jelas lebih penting")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "border border-blue-500 text-center p-2" },
+                    [_vm._v("5")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Jelas lebih penting "),
+                    _c("em", [_vm._v("(Materially more importance)")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "border border-blue-500 text-center p-2" },
+                    [_vm._v("6")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Jelas hingga sangat jelas lebih penting")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "border border-blue-500 text-center p-2" },
+                    [_vm._v("7")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Sangat jelas lebih penting "),
+                    _c("em", [_vm._v("(Significantly more importance)")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "border border-blue-500 text-center p-2" },
+                    [_vm._v("8")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Sangat jelas hingga mutlak lebih penting")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c(
+                    "td",
+                    { staticClass: "border border-blue-500 text-center p-2" },
+                    [_vm._v("9")]
+                  ),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border border-blue-500 p-2" }, [
+                    _vm._v("Mutlak lebih penting "),
+                    _c("em", [_vm._v("(Absolutely more importance)")])
+                  ])
+                ])
+              ])
+            ]
+          )
+        ])
       ])
     ])
   }
@@ -92227,6 +92162,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_chart_js__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_chart_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_chart_js__);
+//
+//
 //
 //
 //

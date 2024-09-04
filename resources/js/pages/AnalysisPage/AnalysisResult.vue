@@ -24,6 +24,8 @@
                         </tbody> -->
                         <tbody>
                             <tr v-for="item in alternatives" :key="item.id" :class="{ 'table-info': item.total == topPoint }">
+                             <!-- <tr v-for="(item, index) in alternatives" :key="item.id" :class="{ 'table-info': item.total == topPoint }"> -->
+                               <!-- <td class="text-center">{{ index + 1 }}</td>  -->
                                 <td nowrap><b>{{ item.code + ' : ' +item.name }}</b></td>
                                 <td class="text-center" v-for="detail in item.details" :key="detail.id">{{ detail.value }}</td>
                                 <td class="text-center table-secondary" :class="{ 'font-weight-bold table-info': item.total == topPoint }">{{ item.total }}</td>
